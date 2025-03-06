@@ -11,8 +11,8 @@ const OTP = () => {
 
   const sendOtp = async () => {
     try {
-      // const response = await fetch("https://authentication-j66u.onrender.com/send-otp", {
-      const response = await fetch("http://localhost:5000/send-otp", {
+      const response = await fetch("https://authentication-1-hafk.onrender.com/send-otp", {
+      // const response = await fetch("http://localhost:5000/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -31,8 +31,8 @@ const OTP = () => {
 
   const verifyOtp = async () => {
     try {
-      // const response = await fetch("https://authentication-j66u.onrender.com/verify-otp", {
-      const response = await fetch("http://localhost:5000/verify-otp", {
+      const response = await fetch("https://authentication-1-hafk.onrender.com/verify-otp", {
+      // const response = await fetch("http://localhost:5000/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp: userOtp }),
