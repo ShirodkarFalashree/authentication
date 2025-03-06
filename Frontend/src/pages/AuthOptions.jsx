@@ -3,6 +3,7 @@ import Aurora from "../component/ui/Aurora";
 import SpotlightCard from "../component/ui/SpotlightCard";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../component/BackButton";
+import Navbar from "../component/Navbar"
 
 const AuthOptions = () => {
   const navigate = useNavigate();
@@ -55,11 +56,12 @@ const AuthOptions = () => {
           speed={0.5}
         />
       </div>
+      <Navbar />
       {/* Back Button */}
       {/* <BackButton /> */}
 
       {/* Cards Container */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl md:mt-20">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mt-20 md:mt-20">
         {verificationMethods.map((method, index) => (
           <SpotlightCard
             key={index}
