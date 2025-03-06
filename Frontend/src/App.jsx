@@ -6,11 +6,13 @@ import Keystroke from "./features/Keystroke";
 import Audio from "./features/Audio";
 import CaptchaAuth from "./features/CaptchaAuth";
 import GestureAuth from "./features/GestureAuth";
+import HomePage from "./pages/HomePage";
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/authoptions" element={<AuthOptions />} />
         <Route path="/otp" element={<OTP />} />
         <Route path="/keystroke" element={<Keystroke />} />
