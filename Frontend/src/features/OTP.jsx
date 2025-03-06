@@ -37,7 +37,7 @@ const OTP = () => {
       });
 
       if (response.ok) {
-        navigate("/");
+        window.location.href = "https://to-desktop-frontend-clone.vercel.app/";
       } else {
         alert("Invalid OTP! Please try again.");
       }

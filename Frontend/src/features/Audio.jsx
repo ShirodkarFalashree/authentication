@@ -4,7 +4,9 @@ import SpotlightCard from "../component/ui/SpotlightCard";
 import Aurora from "../component/ui/Aurora";
 
 const Audio = () => {
-  const [secretMessage, setSecretMessage] = useState(localStorage.getItem("secretMessage") || "");
+  const [secretMessage, setSecretMessage] = useState(
+    localStorage.getItem("secretMessage") || ""
+  );
   const [spokenMessage, setSpokenMessage] = useState("");
   const [isRecordingSecret, setIsRecordingSecret] = useState(!secretMessage);
   const [hasWelcomed, setHasWelcomed] = useState(false);
@@ -18,9 +20,12 @@ const Audio = () => {
   }, [secretMessage, hasWelcomed]);
 
   const startRecording = (setMessage, callback = null) => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      alert("Speech Recognition is not supported in your browser. Please use Google Chrome.");
+      alert(
+        "Speech Recognition is not supported in your browser. Please use Google Chrome."
+      );
       return;
     }
 
@@ -59,7 +64,7 @@ const Audio = () => {
   const verifySpeech = () => {
     if (spokenMessage.toLowerCase() === secretMessage.toLowerCase()) {
       alert("Verification successful! Redirecting...");
-      navigate("/");
+      window.location.href = "https://to-desktop-frontend-clone.vercel.app/";
     } else {
       alert("Incorrect speech! Please try again.");
     }
@@ -79,7 +84,7 @@ const Audio = () => {
   };
 
   return (
-    <div className="relative w-screen h-screen flex flex-col items-center justify-center p-8 bg-black">
+    <div className="relative w-screen h-screen flex flex-col items-center justify-center p-8 bg-black overflow-hidden">
       {/* Aurora Background */}
       <div className="absolute inset-0 -z-10">
         <Aurora
@@ -94,13 +99,18 @@ const Audio = () => {
       <SpotlightCard className="w-96 p-6 text-white text-center">
         {isRecordingSecret ? (
           <>
-            <h2 className="text-xl font-semibold">🔒 Set Your Secret Message</h2>
+            <h2 className="text-xl font-semibold">
+              🔒 Set Your Secret Message
+            </h2>
             <p className="text-sm text-neutral-400 mt-2">
-              Speak a message that only you know. This will be used for verification.
+              Speak a message that only you know. This will be used for
+              verification.
             </p>
             <button
               className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-              onClick={() => startRecording(setSecretMessage, saveSecretMessage)}
+              onClick={() =>
+                startRecording(setSecretMessage, saveSecretMessage)
+              }
             >
               🎤 Record Secret Message
             </button>
@@ -108,7 +118,9 @@ const Audio = () => {
         ) : (
           <>
             <h2 className="text-xl font-semibold">🎤 Speak to Verify</h2>
-            <p className="text-sm text-neutral-400 mt-2">Say your secret message aloud to continue.</p>
+            <p className="text-sm text-neutral-400 mt-2">
+              Say your secret message aloud to continue.
+            </p>
             <button
               className="mt-4 w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
               onClick={() => startRecording(setSpokenMessage)}
@@ -116,7 +128,8 @@ const Audio = () => {
               🔊 Speak Now
             </button>
             <p className="text-neutral-400 mt-4">
-              Spoken Message: <span className="font-semibold">{spokenMessage}</span>
+              Spoken Message:{" "}
+              <span className="font-semibold">{spokenMessage}</span>
             </p>
             <button
               className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
@@ -125,8 +138,12 @@ const Audio = () => {
               ✅ Verify Speech
             </button>
 
-            <h3 className="text-lg font-semibold text-white mt-6">🔄 Reset Secret Message</h3>
-            <p className="text-sm text-neutral-400">You must say the current message correctly to reset.</p>
+            <h3 className="text-lg font-semibold text-white mt-6">
+              🔄 Reset Secret Message
+            </h3>
+            <p className="text-sm text-neutral-400">
+              You must say the current message correctly to reset.
+            </p>
             <button
               className="mt-2 w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
               onClick={resetSecretMessage}

@@ -18,7 +18,7 @@ function App() {
         <Route path="/keystroke" element={<Keystroke />} />
         <Route path="/captcha" element={<CaptchaAuth />} />
         <Route path="/audio" element={<Audio />} />
-        <Route path="/gesture" element={<GestureAuth />} />
+        <Route path="/pattern" element={<GestureAuth />} />
       </Routes>
     </Router>
   );

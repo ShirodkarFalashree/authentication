@@ -34,13 +34,12 @@ const AuthOptions = () => {
     {
       title: "Pattern-Based Verification",
       desc: "Confirms identity through a secret voice message for secure access.",
-      path: "/audio",
+      path: "/pattern",
       status: 1,
     },
     {
       title: "Gesture-Based Verification",
       desc: "Confirms identity through a secret hand gesture.",
-      path: "/audio",
       status: 0,
     },
   ];

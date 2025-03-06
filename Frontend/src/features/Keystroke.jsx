@@ -24,7 +24,7 @@ const Keystroke = () => {
       console.log("Average Interval:", averageInterval);
 
       if (averageInterval > 50 && averageInterval < 500) {
-        navigate("/");
+        window.location.href = "https://to-desktop-frontend-clone.vercel.app/";
       } else {
         alert("Typing pattern does not match human behavior");
       }

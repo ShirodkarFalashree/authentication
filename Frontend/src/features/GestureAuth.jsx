@@ -109,7 +109,7 @@ const GestureAuth = () => {
     }
     if (compareGestures(savedPattern, currentPattern)) {
       alert("Gesture Matched! Redirecting...");
-      navigate("/dashboard");
+      window.location.href = "https://to-desktop-frontend-clone.vercel.app/";
     } else {
       alert("Gesture did not match, try again.");
     }
