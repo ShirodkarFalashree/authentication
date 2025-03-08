@@ -41,6 +41,7 @@ const AuthOptions = () => {
     {
       title: "Gesture-Based Verification",
       desc: "Confirms identity through a secret hand gesture.",
+      path: "/gesture",
       status: 0,
     },
   ];
@@ -70,22 +71,13 @@ const AuthOptions = () => {
             <h2 className="text-xl font-semibold">{method.title}</h2>
             <p className="text-sm text-neutral-400 mt-2">{method.desc}</p>
 
-            {method.status ? (
-              <>
                 <button
                   onClick={() => navigate(method.path)} // Navigate on click
                   className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition hover:cursor-pointer"
                 >
                   Use Now
                 </button>
-              </>
-            ) : (
-              <>
-                <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition hover:cursor-pointer">
-                  In Progress
-                </button>
-              </>
-            )}
+            
           </SpotlightCard>
         ))}
       </div>

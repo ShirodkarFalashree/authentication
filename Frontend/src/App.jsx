@@ -9,6 +9,7 @@ import GestureAuth from "./features/GestureAuth";
 import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/About";
 import ContactCard from "./pages/Contact";
+import Pattern from "./features/Pattern";
 function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/captcha" element={<CaptchaAuth />} />
         <Route path="/audio" element={<Audio />} />
         <Route path="/pattern" element={<GestureAuth />} />
+        <Route path="/gesture" element={<Pattern />} />
       </Routes>
     </Router>
   );
