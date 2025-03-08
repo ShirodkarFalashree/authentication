@@ -64,7 +64,7 @@ const Audio = () => {
   const verifySpeech = () => {
     if (spokenMessage.toLowerCase() === secretMessage.toLowerCase()) {
       alert("Verification successful! Redirecting...");
-      window.location.href = "https://to-desktop-frontend-clone.vercel.app/";
+      window.location.href = "https://favmedia.vercel.app/";
     } else {
       alert("Incorrect speech! Please try again.");
     }

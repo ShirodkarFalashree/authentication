@@ -27,7 +27,7 @@ const CaptchaAuth = () => {
   const verifyCaptcha = () => {
     if (userInput === captcha) {
       alert("Captcha verified! Redirecting...");
-      window.location.href = "https://to-desktop-frontend-clone.vercel.app/";
+      window.location.href = "https://favmedia.vercel.app/";
     } else {
       alert("Captcha incorrect! Try again.");
       setUserInput("");
