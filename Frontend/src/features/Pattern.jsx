@@ -4,11 +4,13 @@ import * as tf from '@tensorflow/tfjs';
 import Webcam from 'react-webcam';
 import similarity from 'compute-cosine-similarity';
 
-const GestureAuth = () => {
+const Pattern = () => {
   const webcamRef = useRef(null);
   const [storedGesture, setStoredGesture] = useState(null);
   const [isGestureSaved, setIsGestureSaved] = useState(() => !!localStorage.getItem('savedGesture'));
-  const [message, setMessage] = useState(isGestureSaved ? 'Show your saved gesture to log in' : 'Show a hand gesture to save');
+  const [message, setMessage] = useState('⏳ Wait, we are setting up...');
+  const [isModelLoaded, setIsModelLoaded] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     console.log('Loading Handpose model...');
@@ -16,6 +18,8 @@ const GestureAuth = () => {
       await tf.setBackend('webgl');
       const net = await handpose.load();
       console.log('Handpose model loaded.');
+      setIsModelLoaded(true);
+      setMessage(isGestureSaved ? 'Show your saved gesture to log in' : 'Show a hand gesture to save');
       detectGesture(net);
     };
     loadHandpose();
@@ -33,7 +37,9 @@ const GestureAuth = () => {
         if (hand.length > 0) {
           console.log('Hand detected:', hand);
           const landmarks = hand[0].landmarks;
-          if (isGestureSaved) {
+          if (isResetting) {
+            verifyForReset(landmarks);
+          } else if (isGestureSaved) {
             verifyGesture(landmarks);
           } else {
             setStoredGesture(landmarks);
@@ -71,6 +77,24 @@ const GestureAuth = () => {
     }
   };
 
+  const verifyForReset = (gesture) => {
+    const savedGesture = JSON.parse(localStorage.getItem('savedGesture'));
+    if (!savedGesture) return;
+    console.log('Verifying gesture for reset...');
+    
+    const similarityScore = compareGestures(savedGesture, gesture);
+    console.log('Reset similarity score:', similarityScore);
+    if (similarityScore > 0.7) {
+      console.log('Gesture verified! Resetting stored gesture...');
+      localStorage.removeItem('savedGesture');
+      setIsGestureSaved(false);
+      setIsResetting(false);
+      setMessage('Gesture reset! Please save a new gesture.');
+    } else {
+      setMessage('Incorrect gesture! Try again.');
+    }
+  };
+
   const compareGestures = (gesture1, gesture2) => {
     console.log('Comparing gestures...');
     const flatGesture1 = gesture1.flat();
@@ -89,7 +113,7 @@ const GestureAuth = () => {
       <div className="w-96 p-6 bg-white/10 backdrop-blur-md rounded-lg text-white text-center shadow-lg">
         <h2 className="text-xl font-semibold mb-4">{message}</h2>
         <Webcam ref={webcamRef} className="rounded-lg border-2 border-gray-300" />
-        {!isGestureSaved && (
+        {isModelLoaded && !isGestureSaved && (
           <button 
             onClick={saveGesture}
             className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
@@ -97,9 +121,17 @@ const GestureAuth = () => {
             ✋ Save Gesture
           </button>
         )}
+        {isGestureSaved && (
+          <button 
+            onClick={() => { setIsResetting(true); setMessage('Show your previous gesture to reset.'); }}
+            className="mt-4 w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+          >
+            🔄 Reset Gesture
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
-export default GestureAuth;
+export default Pattern;
